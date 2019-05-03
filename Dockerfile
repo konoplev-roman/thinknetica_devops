@@ -13,7 +13,8 @@ RUN bundle install
 
 COPY . .
 
+RUN rake assets:precompile
+
 CMD rm -f /app/tmp/pids/server.pid && \
-    rake assets:precompile && \
     rails db:migrate && \
     rails server -b 0.0.0.0
