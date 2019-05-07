@@ -1,0 +1,41 @@
+version: '2'
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=thinknetica_devops_production
+    volumes:
+      - postgres_production:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  nginx:
+    image: nginx
+    environment:
+      - RAILS_ROOT=/app
+    volumes_from:
+      - app
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    command: /bin/bash -c "envsubst '$${RAILS_ROOT}' < /app/nginx.conf > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
+
+  app:
+    image: konoplevroman/thinknetica_devops_app:v.1.0.1
+    environment:
+      - SECRET_KEY_BASE=$SECRET_KEY_BASE
+      - SECRET_TOKEN=$SECRET_TOKEN
+      - DB_HOST=postgres
+      - RAILS_ENV=production
+      - RAILS_LOG_TO_STDOUT=true
+    volumes:
+    - .:/app
+    expose:
+      - 3000
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_production:

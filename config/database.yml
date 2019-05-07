@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DB_HOST") { 'localhost' } %>
+  username: <%= ENV.fetch("DB_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("DB_USER") { 'root' } %>
+
+development:
+  <<: *default
+  database: thinknetica_devops_development
+
+test:
+  <<: *default
+  database: thinknetica_devops_test
+
+production:
+  <<: *default
+  database: thinknetica_devops_production
