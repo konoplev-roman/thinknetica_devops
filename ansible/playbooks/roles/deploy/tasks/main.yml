@@ -1,0 +1,24 @@
+---
+- name: Install python-pip
+  apt:
+    state: latest
+    name: python-pip
+
+- name: Install docker
+  pip:
+    name: ['docker', 'docker-compose']
+
+- name: Create project dir
+  file:
+    path: "/{{ project_name }}"
+    state: directory
+    mode: 0755
+
+- name: Copy compose file
+  copy:
+    src: files/docker-compose.yml
+    dest: "/{{ project_name }}/docker-compose.yml"
+
+- name: Start app service
+  docker_service:
+    project_src: "/{{ project_name }}"
