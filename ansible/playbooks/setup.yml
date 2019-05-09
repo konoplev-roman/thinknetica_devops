@@ -1,0 +1,12 @@
+---
+- hosts: dbservers
+  become: true
+  vars_files:
+    - vars/postgresql.yml
+  roles:
+    - role: geerlingguy.postgresql
+
+- hosts: webservers
+  become: true
+  roles:
+    - geerlingguy.docker

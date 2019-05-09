@@ -1,0 +1,8 @@
+db ansible_ssh_host=localhost ansible_ssh_port=2201 ansible_ssh_user=vagrant
+docker ansible_ssh_host=localhost ansible_ssh_port=2202 ansible_ssh_user=vagrant
+
+[webservers]
+docker
+
+[dbservers]
+db

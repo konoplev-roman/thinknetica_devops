@@ -1,0 +1,11 @@
+version: '2'
+services:
+  app:
+    image: konoplevroman/thinknetica_devops_app:v.1.0.2
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=5432
+      - DB_USER=thinknetica
+      - DB_PASS=supersecure
+    ports:
+      - 80:3000
