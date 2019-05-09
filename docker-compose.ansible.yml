@@ -3,7 +3,7 @@ services:
   app:
     image: konoplevroman/thinknetica_devops_app:v.1.0.2
     environment:
-      - DB_HOST=10.0.0.11
+      - DB_HOST=${DB_HOST}
       - DB_PORT=5432
       - DB_USER=thinknetica
       - DB_PASS=supersecure

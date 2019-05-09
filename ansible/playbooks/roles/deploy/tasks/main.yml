@@ -22,3 +22,5 @@
 - name: Start app service
   docker_service:
     project_src: "/{{ project_name }}"
+  environment:
+    DB_HOST: 10.0.0.11
