@@ -16,7 +16,7 @@
 
 - name: Copy compose file
   copy:
-    src: files/docker-compose.yml
+    src: "../../../../docker-compose.ansible.yml"
     dest: "/{{ project_name }}/docker-compose.yml"
 
 - name: Start app service
